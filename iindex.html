@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptPro.ar - Domina la IA en tu Práctica Legal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #f59e0b;
+            --accent: #dc2626;
+            --light: #f8fafc;
+            --dark: #1e293b;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,128L48,138.7C96,149,192,171,288,170.7C384,171,480,149,576,144C672,139,768,149,864,165.3C960,181,1056,203,1152,197.3C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .countdown {
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .guarantee-badge {
+            background: var(--secondary);
+            color: var(--dark);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+        
+        .benefit-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            height: 100%;
+            border-radius: 12px;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card {
+            border-left: 4px solid var(--secondary);
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .pricing-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.02);
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
+        }
+        
+        .pricing-card.featured::before {
+            content: "MÁS POPULAR";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            z-index: 10;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        
+        .btn-warning:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+        
+        .bonus-section {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border-left: 5px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .language-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+        }
+        
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-list i {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .language-selector {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .language-option {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .language-option.active {
+            background: var(--secondary);
+            color: var(--dark);
+            border-color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .language-option:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .buy-button {
+            display: none;
+        }
+        
+        .buy-button.active {
+            display: block;
+        }
+        
+        /* Notificaciones de compra */
+        .purchase-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 15px;
+            width: 300px;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.5s ease-in-out;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .purchase-notification.show {
+            transform: translateX(0);
+        }
+        
+        .purchase-notification .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .purchase-notification .header i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .purchase-notification .content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .purchase-notification .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .purchase-notification .info {
+            flex-grow: 1;
+        }
+        
+        .purchase-notification .name {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .purchase-notification .action {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .purchase-notification .time {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-align: right;
+        }
+        
+        @media (max-width: 768px) {
+            .purchase-notification {
+                width: 280px;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notificaciones de compra -->
+    <div id="purchaseNotifications"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(37, 99, 235, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand logo" href="#">
+                PromptPro<span>.ar</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#beneficios">Beneficios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contenido">Contenido</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonios">Testimonios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#precio">Precio</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-warning ms-2" href="#oferta">Oferta Limitada</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-lg-start">
+                    <h1 class="display-5 fw-bold mb-4">Domina la IA en tu Práctica Legal con PromptPro</h1>
+                    <p class="lead mb-4">La guía definitiva de prompts especializados para abogados que quieren multiplicar su productividad usando inteligencia artificial</p>
+                    
+                    <div class="countdown mb-4">
+                        <p class="mb-1">OFERTA TERMINA EN:</p>
+                        <div id="countdown-timer" class="d-flex justify-content-center">
+                            <div class="text-center mx-2">
+                                <div class="countdown-number" id="days">02</div>
+                                <small>Días</small>
+                            </div>
+                            <div class="text-center mx-2">
+                                <div class="countdown-number" id="hours">12</div>
+                                <small>Horas</small>
+                            </div>
+                            <div class="text-center mx-2">
+                                <div class="countdown-number" id="minutes">45</div>
+                                <small>Minutos</small>
+                            </div>
+                            <div class="text-center mx-2">
+                                <div class="countdown-number" id="seconds">30</div>
+                                <small>Segundos</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Selector de Idioma -->
+                    <div class="language-selector mb-4">
+                        <p class="mb-2"><strong>Selecciona tu idioma:</strong></p>
+                        <div class="d-flex">
+                            <div class="language-option active me-2" data-lang="es">
+                                <i class="fas fa-language me-1"></i> Español
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <i class="fas fa-language me-1"></i> English
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Botones de compra por idioma -->
+                    <div class="buy-button active" id="buy-es">
+                        <a href="#oferta" class="btn btn-warning btn-lg me-3">Obtener Ahora <i class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="#beneficios" class="btn btn-outline-light btn-lg">Ver Beneficios</a>
+                    </div>
+                    
+                    <div class="buy-button" id="buy-en">
+                        <a href="#offer" class="btn btn-warning btn-lg me-3">Get Now <i class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="#benefits" class="btn btn-outline-light btn-lg">See Benefits</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Guía PromptPro" class="img-fluid rounded shadow-lg">
+                        <div class="language-badge">
+                            <i class="fas fa-globe me-1"></i> Español + English
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section id="beneficios" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold section-title">¿Por qué los abogados eligen PromptPro?</h2>
+                <p class="lead">Optimiza tu trabajo legal con prompts específicos diseñados por expertos</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card benefit-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="guarantee-badge">
+                                <i class="fas fa-bolt fa-2x"></i>
+                            </div>
+                            <h4 class="card-title">Ahorra 10+ Horas Semanales</h4>
+                            <p class="card-text">Automatiza tareas repetitivas como redacción de documentos, análisis de jurisprudencia y revisión de contratos.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card benefit-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="guarantee-badge">
+                                <i class="fas fa-gem fa-2x"></i>
+                            </div>
+                            <h4 class="card-title">Calidad Profesional Garantizada</h4>
+                            <p class="card-text">Obtén documentos y análisis de calidad premium con instrucciones precisas validadas por abogados.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card benefit-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="guarantee-badge">
+                                <i class="fas fa-rocket fa-2x"></i>
+                            </div>
+                            <h4 class="card-title">Ventaja Competitiva</h4>
+                            <p class="card-text">Adopta la IA antes que tus competidores y ofrece servicios más eficientes y de mayor valor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido -->
+    <section id="contenido" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold section-title">Contenido Exclusivo de PromptPro</h2>
+                <p class="lead">PDFs completos en español e inglés con más de 2000 prompts especializados para todas las áreas del derecho + bonus de marketing digital</p>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Redacción de contratos</strong> - Modelos optimizados para diferentes tipos de acuerdos legales</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Análisis de jurisprudencia</strong> - Instrucciones para análisis de casos similares y precedentes</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Elaboración de demandas</strong> - Estructuras para diferentes tipos de procesos judiciales</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Consultas legales específicas</strong> - Por área: penal, civil, laboral, mercantil, etc.</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Estrategias de negociación</strong> - Tácticas y argumentos persuasivos para mediaciones</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Revisiones documentales</strong> - Detección de riesgos, omisiones y cláusulas problemáticas</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Dictámenes legales</strong> - Estructuras profesionales para opiniones jurídicas</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Marketing digital</strong> - Aprende a implementar el marketing digital con IA</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Eficiencia y Organizacion en el estudio juridico</strong> - Implenta prácticas eficaces de administración</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="bonus-section">
+                        <h4><i class="fas fa-gift text-warning me-2"></i> BONOS EXCLUSIVOS (USD $97 valor)</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-star"></i> Guía de mejores prácticas para IA en el sector legal</li>
+                            <li><i class="fas fa-star"></i> Soporte prioritario por email</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-white rounded shadow-sm">
+                        <h5><i class="fas fa-language text-primary me-2"></i> Disponible en dos idiomas</h5>
+                        <p>Puedes seleccionar en español o inglés, perfecto para bufetes internacionales o clientes extranjeros.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Precio y Oferta -->
+    <section id="precio" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold section-title">Inversión que se paga con el primer caso</h2>
+                <p class="lead">Comparado con los honorarios de una sola consulta, PromptPro es una inversión inteligente</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="pricing-card featured p-4 mb-4">
+                        <div class="text-center">
+                            <h3>PromptPro Edición Completa</h3>
+                            <div class="my-3">
+                                <span class="text-decoration-line-through text-muted h5">USD $97</span>
+                                <span class="h1 fw-bold text-primary">USD $10</span>
+                                <span class="h5">/ una vez</span>
+                            </div>
+                            <p class="text-muted">Pago único - Acceso de por vida</p>
+                            
+                            <ul class="feature-list my-4 text-start">
+                                <li><i class="fas fa-check"></i> PDF en español (2000+ prompts especializados)</li>
+                                <li><i class="fas fa-check"></i> PDF en inglés (2000+ prompts especializados)</li>
+                                <li><i class="fas fa-check"></i> Guía de mejores prácticas de IA legal</li>
+                                <li><i class="fas fa-check"></i> Videos tutoriales de implementación</li>
+                                <li><i class="fas fa-check"></i> Soporte prioritario por email</li>
+                            </ul>
+                            
+                            <!-- Selector de idioma para compra -->
+                            <div class="language-selector mb-4">
+                                <p class="mb-2"><strong>Selecciona tu idioma de compra:</strong></p>
+                                <div class="d-flex justify-content-center">
+                                    <div class="language-option active me-2" data-lang="es">
+                                        <i class="fas fa-language me-1"></i> Comprar en Español
+                                    </div>
+                                    <div class="language-option" data-lang="en">
+                                        <i class="fas fa-language me-1"></i> Buy in English
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="oferta" class="countdown my-4">
+                                <p class="mb-1">PRECIO ESPECIAL TERMINA EN:</p>
+                                <div id="countdown-timer-2" class="d-flex justify-content-center">
+                                    <div class="text-center mx-2">
+                                        <div class="countdown-number" id="days2">02</div>
+                                        <small>Días</small>
+                                    </div>
+                                    <div class="text-center mx-2">
+                                        <div class="countdown-number" id="hours2">12</div>
+                                        <small>Horas</small>
+                                    </div>
+                                    <div class="text-center mx-2">
+                                        <div class="countdown-number" id="minutes2">45</div>
+                                        <small>Minutos</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Botones de compra por idioma -->
+                            <div class="buy-button active" id="purchase-es">
+                                <a href="https://pay.hotmart.com/N102061076W" class="btn btn-primary btn-lg w-100 py-3 mb-3">
+                                    <i class="fas fa-lock me-2"></i> COMPRAR AHORA - ACCESO INMEDIATO
+                                </a>
+                                <p class="small mt-2"><i class="fas fa-shield-alt me-1"></i> Pago 100% seguro procesado por Hotmart</p>
+                            </div>
+                            
+                            <div class="buy-button" id="purchase-en">
+                                <a href="https://pay.hotmart.com/M102056984V" class="btn btn-primary btn-lg w-100 py-3 mb-3">
+                                    <i class="fas fa-lock me-2"></i> BUY NOW - IMMEDIATE ACCESS
+                                </a>
+                                <p class="small mt-2"><i class="fas fa-shield-alt me-1"></i> 100% secure payment processed by Hotmart</p>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <img src="https://www.hotmart.com/images/logo-hotmart.svg" alt="Hotmart" width="120" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soporte -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <i class="fas fa-headset fa-4x text-primary"></i>
+                </div>
+                <div class="col-md-10">
+                    <h3>Soporte Dedicado</h3>
+                    <p>¿Tienes dudas sobre cómo implementar los prompts en tu práctica legal? Nuestro equipo está disponible para ayudarte a sacar el máximo provecho de la guía.</p>
+                    <p><strong>Email de soporte:</strong> soporte@promptpro.ar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="logo">PromptPro<span>.ar</span></p>
+                    <p>La guía definitiva de prompts para abogados que quieren dominar la inteligencia artificial en su práctica legal.</p>
+                    <p><small>Este producto es una herramienta de productividad para abogados y no sustituye el asesoramiento legal profesional.</small></p>
+                    <p>&copy; 2025 PromptPro.ar. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="#" class="text-white me-3">Términos de Servicio</a> 
+                    <a href="#" class="text-white me-3">Política de Privacidad</a> 
+                    <a href="mailto:soporte@promptpro.ar" class="text-white">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Datos para las notificaciones de compra
+        const customers = [
+            { name: "María González", location: "Buenos Aires, Argentina", initial: "M" },
+            { name: "Carlos López", location: "Madrid, España", initial: "C" },
+            { name: "Ana Martínez", location: "Ciudad de México, México", initial: "A" },
+            { name: "Javier Rodríguez", location: "Bogotá, Colombia", initial: "J" },
+            { name: "Laura Fernández", location: "Santiago, Chile", initial: "L" },
+            { name: "Diego Silva", location: "Lima, Perú", initial: "D" },
+            { name: "Sofía Pérez", location: "Montevideo, Uruguay", initial: "S" },
+            { name: "Miguel Torres", location: "Quito, Ecuador", initial: "M" },
+            { name: "Elena Vargas", location: "Caracas, Venezuela", initial: "E" },
+            { name: "Roberto Díaz", location: "Guatemala City, Guatemala", initial: "R" },
+            { name: "Patricia Ruiz", location: "San José, Costa Rica", initial: "P" },
+            { name: "Fernando Castro", location: "Panamá City, Panamá", initial: "F" }
+        ];
+        
+        const actions = [
+            "acaba de adquirir PromptPro",
+            "se unió a PromptPro",
+            "compró la guía de prompts",
+            "adquirió PromptPro hace unos momentos",
+            "obtuvo acceso a PromptPro"
+        ];
+        
+        // Función para mostrar notificación de compra
+        function showPurchaseNotification() {
+            const customer = customers[Math.floor(Math.random() * customers.length)];
+            const action = actions[Math.floor(Math.random() * actions.length)];
+            
+            const notification = document.createElement('div');
+            notification.className = 'purchase-notification';
+            notification.innerHTML = `
+                <div class="header">
+                    <i class="fas fa-bell"></i>
+                    <strong>Compra Reciente</strong>
+                </div>
+                <div class="content">
+                    <div class="avatar">${customer.initial}</div>
+                    <div class="info">
+                        <div class="name">${customer.name}</div>
+                        <div class="action">${action}</div>
+                    </div>
+                    <div class="time">Ahora mismo</div>
+                </div>
+            `;
+            
+            document.getElementById('purchaseNotifications').appendChild(notification);
+            
+            // Mostrar notificación
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Ocultar y eliminar notificación después de 7 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 500);
+            }, 7000);
+        }
+        
+        // Mostrar primera notificación después de 10 segundos
+        setTimeout(showPurchaseNotification, 10000);
+        
+        // Mostrar notificaciones cada 50 segundos
+        setInterval(showPurchaseNotification, 50000);
+        
+        // Selector de idioma
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                
+                // Remover clase active de todas las opciones
+                document.querySelectorAll('.language-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                
+                // Agregar clase active a la opción seleccionada
+                this.classList.add('active');
+                
+                // Mostrar/ocultar contenido según idioma
+                if (lang === 'es') {
+                    document.getElementById('buy-es').classList.add('active');
+                    document.getElementById('buy-en').classList.remove('active');
+                    document.getElementById('purchase-es').classList.add('active');
+                    document.getElementById('purchase-en').classList.remove('active');
+                } else {
+                    document.getElementById('buy-es').classList.remove('active');
+                    document.getElementById('buy-en').classList.add('active');
+                    document.getElementById('purchase-es').classList.remove('active');
+                    document.getElementById('purchase-en').classList.add('active');
+                }
+            });
+        });
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const targetDate = new Date(now);
+            targetDate.setDate(now.getDate() + 2); // 14hs desde ahora
+            targetDate.setHours(23, 59, 59, 999); // Fin del día
+            
+            const timeRemaining = targetDate - now;
+            
+            if (timeRemaining <= 0) {
+                document.getElementById('countdown-timer').innerHTML = '<div class="countdown-number">OFERTA EXPIRADA</div>';
+                document.getElementById('countdown-timer-2').innerHTML = '<div class="countdown-number">OFERTA EXPIRADA</div>';
+                return;
+            }
+            
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            document.getElementById('days2').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours2').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes2').textContent = minutes.toString().padStart(2, '0');
+        }
+        
+        // Actualizar cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Ejecutar inmediatamente
+        
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Cambiar navbar al hacer scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'var(--primary)';
+            } else {
+                navbar.style.background = 'rgba(37, 99, 235, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
