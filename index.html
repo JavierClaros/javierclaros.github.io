@@ -114,6 +114,33 @@
             border-left: 4px solid var(--secondary);
             background: var(--light);
             border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .testimonial-rating {
+            color: var(--secondary);
+            margin-bottom: 10px;
         }
         
         .pricing-card {
@@ -552,6 +579,142 @@
         </div>
     </section>
 
+    <!-- Testimonios -->
+    <section id="testimonios" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold section-title">Lo que dicen nuestros clientes</h2>
+                <p class="lead">Abogados que ya están transformando su práctica legal con nuestra guía</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar">M</div>
+                            <div>
+                                <h5 class="mb-1">Dra. María González</h5>
+                                <p class="text-muted mb-0">Abogada Penalista - Buenos Aires</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Esta guía me ha ahorrado horas de trabajo semanales. Los prompts para redacción de escritos son increíblemente precisos. ¡Una inversión que se paga el primer día!"</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar">C</div>
+                            <div>
+                                <h5 class="mb-1">Dr. Carlos López</h5>
+                                <p class="text-muted mb-0">Especialista en Derecho Laboral - Madrid</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Como abogado con 15 años de experiencia, pensé que lo había visto todo. Esta guía me demostró lo contrario. La IA aplicada al derecho es el futuro y PromptPro es la llave."</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar">A</div>
+                            <div>
+                                <h5 class="mb-1">Dra. Ana Martínez</h5>
+                                <p class="text-muted mb-0">Derecho Corporativo - Ciudad de México</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Los prompts para revisión de contratos han sido un salvavidas para mi bufete. Detectamos riesgos que antes pasaban desapercibidos. ¡Altamente recomendado!"</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar">J</div>
+                            <div>
+                                <h5 class="mb-1">Dr. Javier Rodríguez</h5>
+                                <p class="text-muted mb-0">Derecho Civil - Bogotá</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"La sección de análisis de jurisprudencia es oro puro. Ahora puedo preparar mis casos con una base de argumentos mucho más sólida en la mitad de tiempo."</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar">L</div>
+                            <div>
+                                <h5 class="mb-1">Dra. Laura Fernández</h5>
+                                <p class="text-muted mb-0">Derecho de Familia - Santiago</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Como abogada independiente, el tiempo es mi recurso más valioso. Esta guía me ha permitido atender más casos sin sacrificar la calidad. ¡Excelente inversión!"</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar">D</div>
+                            <div>
+                                <h5 class="mb-1">Dr. Diego Silva</h5>
+                                <p class="text-muted mb-0">Derecho Mercantil - Lima</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Los bonos de marketing digital han sido la sorpresa más grata. Ahora estoy captando más clientes gracias a las estrategias que aprendí. ¡Vale cada centavo!"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#oferta" class="btn btn-primary btn-lg">Únete a estos abogados satisfechos</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Precio y Oferta -->
     <section id="precio" class="py-5 bg-light">
         <div class="container">
@@ -705,7 +868,7 @@
         const actions = [
             "acaba de adquirir Guia definitiva +2000 prompts",
             "se unió a PromptPro",
-            "compró la guía de prompts",
+            "compró la guía definitiva +2000 prompts",
             "adquirió Guia definitiva +2000 prompts hace unos momentos",
             "obtuvo acceso a PromptPro"
         ];
