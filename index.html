@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PromptPro.ar - Domina la IA en tu Práctica Legal</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    
     <!-- Meta tags mejorados -->
     <meta name="description" content="Domina la IA en tu práctica legal con nuestra Mega Guía de 2000+ Prompts Jurídicos. Optimiza tu trabajo con inteligencia artificial especializada.">
     <meta name="keywords" content="IA, inteligencia artificial, derecho, abogados, prompts jurídicos, legal tech">
@@ -50,13 +53,19 @@
             background-position: bottom;
         }
         
-        .logo {
+        .logo-img {
+            max-height: 60px;
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
             font-weight: 800;
             font-size: 1.8rem;
             color: white;
         }
         
-        .logo span {
+        .logo-text span {
             color: var(--secondary);
         }
         
@@ -255,6 +264,13 @@
             display: block;
         }
         
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
         /* Notificaciones de compra */
         .purchase-notification {
             position: fixed;
@@ -332,6 +348,14 @@
                 right: 10px;
                 bottom: 10px;
             }
+            
+            .logo-img {
+                max-height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -342,8 +366,9 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(37, 99, 235, 0.95); backdrop-filter: blur(10px);">
         <div class="container">
-            <a class="navbar-brand logo" href="#">
-                PromptPro<span>.ar</span>
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="logo.png" alt="PromptPro.ar" class="logo-img">
+                <span class="logo-text">PromptPro<span>.ar</span></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -416,7 +441,7 @@
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80&auto=webp" alt="🧠📚 Mega Guía de 2000+ Prompts Jurídicos – Derecho Fácil con IA" class="img-fluid rounded shadow-lg" loading="lazy">
+                        <img src="guia definitiva.png" alt="🧠📚 Mega Guía de 2000+ Prompts Jurídicos – Derecho Fácil con IA" class="product-image" loading="lazy">
                         <div class="language-badge">
                             <i class="fas fa-globe me-1"></i> Español + English
                         </div>
@@ -471,6 +496,14 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Imagen del producto en la sección de beneficios -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <img src="guia definitiva.png" alt="Vista previa de la guía de prompts jurídicos" class="product-image" style="max-width: 600px;">
+                    <p class="mt-3 text-muted">Vista previa de la guía completa con más de 2000 prompts especializados</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -508,6 +541,11 @@
                     <div class="mt-4 p-4 bg-white rounded shadow-sm">
                         <h5><i class="fas fa-language text-primary me-2"></i> Disponible en dos idiomas</h5>
                         <p>Puedes seleccionar en español o inglés, perfecto para bufetes internacionales o clientes extranjeros.</p>
+                    </div>
+                    
+                    <!-- Logo en la sección de contenido -->
+                    <div class="text-center mt-4">
+                        <img src="logo.png" alt="PromptPro.ar" class="img-fluid" style="max-height: 100px;">
                     </div>
                 </div>
             </div>
@@ -602,7 +640,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-2 text-center">
-                    <i class="fas fa-headset fa-4x text-primary"></i>
+                    <img src="logo.png" alt="PromptPro.ar" class="img-fluid" style="max-height: 80px;">
                 </div>
                 <div class="col-md-10">
                     <h3>Soporte Dedicado</h3>
@@ -618,7 +656,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <p class="logo">PromptPro<span>.ar</span></p>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="logo.png" alt="PromptPro.ar" class="logo-img me-3">
+                        <p class="logo-text mb-0">PromptPro<span>.ar</span></p>
+                    </div>
                     <p>La guía definitiva de prompts para abogados que quieren dominar la inteligencia artificial en su práctica legal.</p>
                     <p><small>Este producto es una herramienta de productividad para abogados y no sustituye el asesoramiento legal profesional.</small></p>
                     <p>&copy; 2025 PromptPro.ar. Todos los derechos reservados.</p>
@@ -662,10 +703,10 @@
         ];
         
         const actions = [
-            "acaba de adquirir PromptPro",
+            "acaba de adquirir Guia definitiva +2000 prompts",
             "se unió a PromptPro",
             "compró la guía de prompts",
-            "adquirió PromptPro hace unos momentos",
+            "adquirió Guia definitiva +2000 prompts hace unos momentos",
             "obtuvo acceso a PromptPro"
         ];
         
