@@ -3,136 +3,683 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego Gratis - PromptPro.ar</title>
+    <title>Juego Gratis - PromptPro</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Mismos recursos que tu index.html -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
     
-    <!-- Tus estilos principales -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Estilos del juego -->
-    <link rel="stylesheet" href="assets/css/juego.css">
+    <style>
+        /* ESTILOS ESPECÍFICOS DEL JUEGO - IDÉNTICOS A TU DISEÑO */
+        .game-section {
+            padding: 7rem 0 2rem;
+            background: linear-gradient(180deg, #0c0c0c 0%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+        
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .game-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .game-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff0000;
+            margin-bottom: 1rem;
+        }
+        
+        .game-subtitle {
+            font-size: 1.2rem;
+            color: #ffffff;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff0000;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #ffffff;
+            opacity: 0.7;
+        }
+        
+        .target-display {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+        }
+        
+        .target-text {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-right: 0.5rem;
+        }
+        
+        .target-color {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff0000;
+            text-transform: uppercase;
+        }
+        
+        .game-board {
+            width: 100%;
+            height: 400px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .circle:hover {
+            transform: scale(1.1);
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .game-button {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .game-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+        }
+        
+        .game-button:active {
+            transform: translateY(1px);
+        }
+        
+        .game-button.secondary {
+            background: linear-gradient(45deg, #333, #555);
+        }
+        
+        .game-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .instructions-card, .scores-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ff0000;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .instruction-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .instruction-icon {
+            color: #ff0000;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .scores-list {
+            list-style: none;
+        }
+        
+        .scores-list li {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            color: #ffffff;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .game-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-board {
+                height: 300px;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar igual a tu index.html -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="logo.ico" alt="PromptPro.ar" class="logo-img">
-                PromptPro<span>.ar</span>
+    <!-- HEADER IDÉNTICO AL DE TU SITIO -->
+    <header class="header" id="header" style="background: #0c0c0c; border-bottom: 1px solid #333;">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <img src="assets/images/logo-promptpro.png" alt="Logo PromptPro" class="nav__logo-img">
+                PromptPro
             </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#beneficios">Beneficios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#testimonios">Testimonios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#faq">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="juego.html">Juego Gratis</a></li>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Inicio</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html#guia" class="nav__link">Guía PDF</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="juego.html" class="nav__link active-link">Juego Gratis</a>
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- SECCIÓN DEL JUEGO -->
+        <section class="game-section">
+            <div class="game-container">
+                <div class="game-header">
+                    <h1 class="game-title">Color Frenzy</h1>
+                    <p class="game-subtitle">¡Demuestra tus reflejos! Haz clic en el color correcto antes de que desaparezca y compite por la mejor puntuación.</p>
+                </div>
+
+                <!-- Estadísticas del juego -->
+                <div class="game-stats">
+                    <div class="stat-card">
+                        <span class="stat-value" id="score">0</span>
+                        <span class="stat-label">Puntuación</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="timer">60</span>
+                        <span class="stat-label">Tiempo</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="level">1</span>
+                        <span class="stat-label">Nivel</span>
+                    </div>
+                </div>
+
+                <!-- Color objetivo -->
+                <div class="target-display">
+                    <span class="target-text">Color objetivo:</span>
+                    <span class="target-color" id="target-color">ROJO</span>
+                </div>
+
+                <!-- Tablero de juego -->
+                <div class="game-board" id="game-board">
+                    <!-- Los círculos aparecerán aquí -->
+                </div>
+
+                <!-- Controles -->
+                <div class="game-controls">
+                    <button class="game-button" id="start-btn">
+                        <i class="ri-play-fill"></i> Comenzar Juego
+                    </button>
+                    <button class="game-button secondary" id="reset-btn" style="display: none;">
+                        <i class="ri-refresh-fill"></i> Reiniciar
+                    </button>
+                </div>
+
+                <!-- Instrucciones y puntuaciones -->
+                <div class="game-content">
+                    <div class="instructions-card">
+                        <h3 class="card-title">Cómo jugar</h3>
+                        <div class="instruction-item">
+                            <i class="ri-checkbox-circle-fill instruction-icon"></i>
+                            <span>Haz clic en los círculos que coincidan con el color objetivo</span>
+                        </div>
+                        <div class="instruction-item">
+                            <i class="ri-checkbox-circle-fill instruction-icon"></i>
+                            <span>Cada acierto suma puntos (más puntos en niveles altos)</span>
+                        </div>
+                        <div class="instruction-item">
+                            <i class="ri-checkbox-circle-fill instruction-icon"></i>
+                            <span>Los círculos desaparecen después de un tiempo</span>
+                        </div>
+                        <div class="instruction-item">
+                            <i class="ri-checkbox-circle-fill instruction-icon"></i>
+                            <span>¡Tienes 60 segundos para conseguir la máxima puntuación!</span>
+                        </div>
+                    </div>
+
+                    <div class="scores-card">
+                        <h3 class="card-title">Mejores Puntuaciones</h3>
+                        <ul class="scores-list" id="scores-list">
+                            <!-- Las puntuaciones se cargarán aquí -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER IDÉNTICO AL DE TU SITIO -->
+    <footer class="footer section" style="background: #0c0c0c; border-top: 1px solid #333;">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <a href="index.html" class="footer__logo">
+                    <img src="assets/images/logo-promptpro.png" alt="Logo PromptPro" class="footer__logo-img">
+                    PromptPro
+                </a>
+
+                <p class="footer__description" style="color: #ffffff;">
+                    Domina el arte del prompting y lleva tus <br>
+                    habilidades al siguiente nivel.
+                </p>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title" style="color: #ffffff;">Enlaces</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="index.html" class="footer__link" style="color: #ffffff;">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="index.html#guia" class="footer__link" style="color: #ffffff;">Guía PDF</a>
+                    </li>
+                    <li>
+                        <a href="juego.html" class="footer__link" style="color: #ffffff;">Juego Gratis</a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </nav>
 
-    <!-- Contenido principal del juego -->
-    <main class="container mt-5 pt-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <h1 class="text-center mb-4">Color Frenzy</h1>
-                <p class="text-center mb-4">¡Haz clic en el color correcto antes de que desaparezca! Demuestra tus reflejos.</p>
-                
-                <div class="game-stats d-flex justify-content-around mb-4">
-                    <div class="stat text-center">
-                        <div class="stat-value" id="score">0</div>
-                        <div class="stat-label">Puntuación</div>
-                    </div>
-                    <div class="stat text-center">
-                        <div class="stat-value" id="timer">60</div>
-                        <div class="stat-label">Tiempo</div>
-                    </div>
-                    <div class="stat text-center">
-                        <div class="stat-value" id="level">1</div>
-                        <div class="stat-label">Nivel</div>
-                    </div>
-                </div>
-                
-                <div class="target-color-display text-center mb-3 p-3 bg-light rounded">
-                    <span>Color objetivo:</span>
-                    <span class="target-color fw-bold" id="target-color">ROJO</span>
-                </div>
-                
-                <div class="game-board mb-4" id="game-board"></div>
-                
-                <div class="game-controls text-center">
-                    <button class="btn btn-danger btn-lg me-2" id="start-btn">
-                        <i class="bi bi-play-fill"></i> Comenzar Juego
-                    </button>
-                    <button class="btn btn-outline-secondary btn-lg" id="reset-btn" style="display: none;">
-                        <i class="bi bi-arrow-repeat"></i> Reiniciar
-                    </button>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="bg-light p-4 rounded">
-                    <h3 class="mb-3">Cómo jugar</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">✅ Haz clic en los círculos del color objetivo</li>
-                        <li class="mb-2">✅ Cada acierto suma puntos</li>
-                        <li class="mb-2">✅ Más puntos en niveles altos</li>
-                        <li class="mb-2">✅ ¡60 segundos para máxima puntuación!</li>
-                    </ul>
-                    
-                    <h3 class="mt-4 mb-3">Mejores Puntuaciones</h3>
-                    <ul class="list-unstyled" id="scores-list"></ul>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer igual a tu index.html -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="logo.ico" alt="PromptPro.ar" class="logo-img me-3">
-                        <p class="logo-text mb-0">PromptPro<span>.ar</span></p>
-                    </div>
-                    <p>La guía definitiva de prompts para abogados que quieren dominar la inteligencia artificial.</p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <h5>Enlaces</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-white">Inicio</a></li>
-                        <li><a href="index.html#guia" class="text-white">Guía PDF</a></li>
-                        <li><a href="juego.html" class="text-white">Juego Gratis</a></li>
-                    </ul>
-                    <div class="mt-3">
-                        <a href="#" class="text-white me-3">Términos</a> 
-                        <a href="#" class="text-white me-3">Privacidad</a> 
-                        <a href="mailto:soporte@promptpro.ar" class="text-white">Contacto</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="mb-1"><small>Herramienta de productividad para abogados</small></p>
-                    <p class="mb-0">&copy; 2025 PromptPro.ar. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </div>
+        <p class="footer__copy" style="color: #ffffff;">&#169; 2024 PromptPro. Todos los derechos reservados</p>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <!-- JavaScript del juego -->
-    <script src="assets/js/juego.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const gameBoard = document.getElementById('game-board');
+            const scoreElement = document.getElementById('score');
+            const timerElement = document.getElementById('timer');
+            const levelElement = document.getElementById('level');
+            const targetColorElement = document.getElementById('target-color');
+            const startBtn = document.getElementById('start-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const scoresList = document.getElementById('scores-list');
+            
+            // Variables del juego
+            let score = 0;
+            let timeLeft = 60;
+            let level = 1;
+            let gameActive = false;
+            let timerInterval;
+            let circleInterval;
+            let targetColor = '';
+            
+            // Colores disponibles (usando tu paleta)
+            const colors = [
+                { name: 'ROJO', value: '#ff0000' },
+                { name: 'BLANCO', value: '#ffffff' },
+                { name: 'NEGRO', value: '#000000' },
+                { name: 'AZUL', value: '#2196F3' },
+                { name: 'VERDE', value: '#4CAF50' },
+                { name: 'AMARILLO', value: '#FFEB3B' }
+            ];
+            
+            // Cargar mejores puntuaciones
+            let highScores = JSON.parse(localStorage.getItem('promptProHighScores')) || [];
+            updateHighScores();
+            
+            // Actualizar puntuaciones
+            function updateHighScores() {
+                scoresList.innerHTML = '';
+                highScores.sort((a, b) => b - a).slice(0, 5).forEach((score, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${index + 1}. ${score} puntos</span>`;
+                    scoresList.appendChild(li);
+                });
+            }
+            
+            // Iniciar juego
+            function startGame() {
+                if (gameActive) return;
+                
+                score = 0;
+                timeLeft = 60;
+                level = 1;
+                gameActive = true;
+                
+                scoreElement.textContent = score;
+                timerElement.textContent = timeLeft;
+                levelElement.textContent = level;
+                timerElement.style.color = '#ff0000';
+                startBtn.style.display = 'none';
+                resetBtn.style.display = 'flex';
+                
+                gameBoard.innerHTML = '';
+                setNewTargetColor();
+                
+                timerInterval = setInterval(updateTimer, 1000);
+                startCircleGeneration();
+            }
+            
+            // Temporizador
+            function updateTimer() {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    endGame();
+                } else if (timeLeft <= 10) {
+                    timerElement.style.color = '#ff0000';
+                }
+                
+                // Aumentar nivel cada 15 segundos
+                if (timeLeft % 15 === 0 && timeLeft < 60) {
+                    levelUp();
+                }
+            }
+            
+            // Subir de nivel
+            function levelUp() {
+                level++;
+                levelElement.textContent = level;
+                
+                clearInterval(circleInterval);
+                startCircleGeneration();
+            }
+            
+            // Nuevo color objetivo
+            function setNewTargetColor() {
+                const randomIndex = Math.floor(Math.random() * colors.length);
+                targetColor = colors[randomIndex];
+                targetColorElement.textContent = targetColor.name;
+                targetColorElement.style.color = targetColor.value;
+            }
+            
+            // Generar círculos
+            function startCircleGeneration() {
+                const speed = Math.max(500, 1000 - (level * 100));
+                
+                circleInterval = setInterval(() => {
+                    if (!gameActive) return;
+                    createCircle();
+                }, speed);
+            }
+            
+            // Crear círculo
+            function createCircle() {
+                const circle = document.createElement('div');
+                circle.className = 'circle fade-in';
+                
+                const size = Math.floor(Math.random() * 40) + 40;
+                circle.style.width = `${size}px`;
+                circle.style.height = `${size}px`;
+                
+                const maxX = gameBoard.offsetWidth - size;
+                const maxY = gameBoard.offsetHeight - size;
+                const x = Math.floor(Math.random() * maxX);
+                const y = Math.floor(Math.random() * maxY);
+                circle.style.left = `${x}px`;
+                circle.style.top = `${y}px`;
+                
+                const colorIndex = Math.floor(Math.random() * colors.length);
+                const color = colors[colorIndex];
+                circle.style.backgroundColor = color.value;
+                circle.dataset.color = color.name;
+                
+                if (color.name === 'BLANCO' || color.name === 'AMARILLO') {
+                    circle.style.border = '2px solid #333';
+                }
+                
+                const lifeTime = Math.max(1500, 3000 - (level * 200));
+                
+                gameBoard.appendChild(circle);
+                
+                circle.addEventListener('click', handleCircleClick);
+                
+                setTimeout(() => {
+                    if (circle.parentNode) {
+                        circle.remove();
+                    }
+                }, lifeTime);
+            }
+            
+            // Manejar clic en círculo
+            function handleCircleClick(e) {
+                if (!gameActive) return;
+                
+                const circle = e.target;
+                const circleColor = circle.dataset.color;
+                
+                if (circleColor === targetColor.name) {
+                    score += level * 10;
+                    scoreElement.textContent = score;
+                    
+                    createParticles(circle);
+                    circle.style.transform = 'scale(1.5)';
+                    circle.style.opacity = '0';
+                    
+                    setTimeout(setNewTargetColor, 300);
+                } else {
+                    score = Math.max(0, score - 5);
+                    scoreElement.textContent = score;
+                    
+                    circle.style.border = '3px solid #ff0000';
+                    setTimeout(() => {
+                        circle.style.border = circleColor === 'BLANCO' || circleColor === 'AMARILLO' ? '2px solid #333' : 'none';
+                    }, 200);
+                }
+                
+                setTimeout(() => {
+                    if (circle.parentNode) {
+                        circle.remove();
+                    }
+                }, 300);
+            }
+            
+            // Partículas de efecto
+            function createParticles(element) {
+                const rect = element.getBoundingClientRect();
+                const boardRect = gameBoard.getBoundingClientRect();
+                const centerX = rect.left - boardRect.left + rect.width / 2;
+                const centerY = rect.top - boardRect.top + rect.height / 2;
+                
+                for (let i = 0; i < 8; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.backgroundColor = element.style.backgroundColor;
+                    particle.style.left = `${centerX}px`;
+                    particle.style.top = `${centerY}px`;
+                    
+                    gameBoard.appendChild(particle);
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 2 + Math.random() * 3;
+                    const vx = Math.cos(angle) * speed;
+                    const vy = Math.sin(angle) * speed;
+                    
+                    let x = centerX;
+                    let y = centerY;
+                    let opacity = 1;
+                    
+                    const animateParticle = () => {
+                        x += vx;
+                        y += vy;
+                        opacity -= 0.02;
+                        
+                        particle.style.left = `${x}px`;
+                        particle.style.top = `${y}px`;
+                        particle.style.opacity = opacity;
+                        
+                        if (opacity > 0) {
+                            requestAnimationFrame(animateParticle);
+                        } else {
+                            particle.remove();
+                        }
+                    };
+                    
+                    requestAnimationFrame(animateParticle);
+                }
+            }
+            
+            // Terminar juego
+            function endGame() {
+                gameActive = false;
+                clearInterval(timerInterval);
+                clearInterval(circleInterval);
+                
+                gameBoard.innerHTML = '';
+                
+                if (score > 0 && (highScores.length < 5 || score > Math.min(...highScores))) {
+                    highScores.push(score);
+                    highScores.sort((a, b) => b - a);
+                    if (highScores.length > 5) {
+                        highScores = highScores.slice(0, 5);
+                    }
+                    localStorage.setItem('promptProHighScores', JSON.stringify(highScores));
+                    updateHighScores();
+                }
+                
+                const message = document.createElement('div');
+                message.style.position = 'absolute';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                message.style.padding = '2rem';
+                message.style.borderRadius = '15px';
+                message.style.textAlign = 'center';
+                message.style.zIndex = '10';
+                message.style.border = '2px solid #ff0000';
+                message.style.color = '#ffffff';
+                message.innerHTML = `
+                    <h3 style="color: #ff0000; margin-bottom: 1rem;">¡Juego Terminado!</h3>
+                    <p style="margin-bottom: 1.5rem;">Tu puntuación: <strong style="color: #ff0000;">${score}</strong></p>
+                    <button class="game-button" id="play-again">
+                        <i class="ri-refresh-fill"></i> Jugar de Nuevo
+                    </button>
+                `;
+                
+                gameBoard.appendChild(message);
+                
+                document.getElementById('play-again').addEventListener('click', () => {
+                    message.remove();
+                    startGame();
+                });
+            }
+            
+            // Event listeners
+            startBtn.addEventListener('click', startGame);
+            resetBtn.addEventListener('click', () => {
+                if (gameActive) {
+                    endGame();
+                }
+                startGame();
+            });
+            
+            // Inicialización
+            setNewTargetColor();
+        });
+    </script>
 </body>
 </html>
