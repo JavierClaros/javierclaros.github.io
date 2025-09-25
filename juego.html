@@ -195,6 +195,10 @@
             background: linear-gradient(45deg, #333, #555);
         }
         
+        .game-button.stop {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+        }
+        
         .game-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -348,6 +352,9 @@
                     <button class="game-button" id="start-btn">
                         <i class="ri-play-fill"></i> Comenzar Juego
                     </button>
+                    <button class="game-button stop" id="stop-btn" style="display: none;">
+                        <i class="ri-stop-fill"></i> Detener
+                    </button>
                     <button class="game-button secondary" id="reset-btn" style="display: none;">
                         <i class="ri-refresh-fill"></i> Reiniciar
                     </button>
@@ -432,6 +439,7 @@
             const levelElement = document.getElementById('level');
             const targetColorElement = document.getElementById('target-color');
             const startBtn = document.getElementById('start-btn');
+            const stopBtn = document.getElementById('stop-btn');
             const resetBtn = document.getElementById('reset-btn');
             const scoresList = document.getElementById('scores-list');
             
@@ -481,11 +489,72 @@
                 timerElement.textContent = timeLeft;
                 levelElement.textContent = level;
                 timerElement.style.color = '#ff0000';
+                
+                // Mostrar botones correctos
                 startBtn.style.display = 'none';
+                stopBtn.style.display = 'flex';
                 resetBtn.style.display = 'flex';
                 
                 gameBoard.innerHTML = '';
                 setNewTargetColor();
+                
+                timerInterval = setInterval(updateTimer, 1000);
+                startCircleGeneration();
+            }
+            
+            // Detener juego
+            function stopGame() {
+                if (!gameActive) return;
+                
+                gameActive = false;
+                clearInterval(timerInterval);
+                clearInterval(circleInterval);
+                
+                // Mostrar botones correctos
+                startBtn.style.display = 'flex';
+                startBtn.innerHTML = '<i class="ri-play-fill"></i> Continuar';
+                stopBtn.style.display = 'none';
+                resetBtn.style.display = 'flex';
+                
+                // Mostrar mensaje de pausa
+                const pauseMessage = document.createElement('div');
+                pauseMessage.style.position = 'absolute';
+                pauseMessage.style.top = '50%';
+                pauseMessage.style.left = '50%';
+                pauseMessage.style.transform = 'translate(-50%, -50%)';
+                pauseMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                pauseMessage.style.padding = '2rem';
+                pauseMessage.style.borderRadius = '15px';
+                pauseMessage.style.textAlign = 'center';
+                pauseMessage.style.zIndex = '10';
+                pauseMessage.style.border = '2px solid #ff0000';
+                pauseMessage.style.color = '#ffffff';
+                pauseMessage.innerHTML = `
+                    <h3 style="color: #ff0000; margin-bottom: 1rem;">Juego Pausado</h3>
+                    <p style="margin-bottom: 1.5rem;">Puntuación actual: <strong style="color: #ff0000;">${score}</strong></p>
+                    <p style="margin-bottom: 1.5rem;">Tiempo restante: <strong style="color: #ff0000;">${timeLeft}</strong> segundos</p>
+                `;
+                pauseMessage.id = 'pause-message';
+                
+                gameBoard.appendChild(pauseMessage);
+            }
+            
+            // Continuar juego
+            function continueGame() {
+                if (gameActive) return;
+                
+                gameActive = true;
+                
+                // Ocultar mensaje de pausa
+                const pauseMessage = document.getElementById('pause-message');
+                if (pauseMessage) {
+                    pauseMessage.remove();
+                }
+                
+                // Mostrar botones correctos
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'flex';
+                resetBtn.style.display = 'flex';
                 
                 timerInterval = setInterval(updateTimer, 1000);
                 startCircleGeneration();
@@ -695,16 +764,65 @@
                     message.remove();
                     startGame();
                 });
+                
+                // Mostrar botones correctos al finalizar
+                startBtn.style.display = 'flex';
+                startBtn.innerHTML = '<i class="ri-play-fill"></i> Comenzar Juego';
+                stopBtn.style.display = 'none';
+                resetBtn.style.display = 'none';
+            }
+            
+            // Reiniciar juego
+            function resetGame() {
+                // Limpiar intervalos
+                clearInterval(timerInterval);
+                clearInterval(circleInterval);
+                
+                // Ocultar mensaje de pausa si existe
+                const pauseMessage = document.getElementById('pause-message');
+                if (pauseMessage) {
+                    pauseMessage.remove();
+                }
+                
+                // Reiniciar variables
+                gameActive = false;
+                score = 0;
+                timeLeft = 60;
+                level = 1;
+                
+                // Actualizar UI
+                scoreElement.textContent = score;
+                timerElement.textContent = timeLeft;
+                levelElement.textContent = level;
+                timerElement.style.color = '#ff0000';
+                
+                // Limpiar tablero
+                gameBoard.innerHTML = '';
+                
+                // Mostrar botones correctos
+                startBtn.style.display = 'flex';
+                startBtn.innerHTML = '<i class="ri-play-fill"></i> Comenzar Juego';
+                stopBtn.style.display = 'none';
+                resetBtn.style.display = 'none';
+                
+                setNewTargetColor();
             }
             
             // Event listeners
-            startBtn.addEventListener('click', startGame);
-            resetBtn.addEventListener('click', () => {
-                if (gameActive) {
-                    endGame();
+            startBtn.addEventListener('click', function() {
+                if (gameActive) return;
+                
+                if (timeLeft < 60 && score > 0) {
+                    // Continuar juego pausado
+                    continueGame();
+                } else {
+                    // Iniciar nuevo juego
+                    startGame();
                 }
-                startGame();
             });
+            
+            stopBtn.addEventListener('click', stopGame);
+            resetBtn.addEventListener('click', resetGame);
             
             // Inicialización
             setNewTargetColor();
