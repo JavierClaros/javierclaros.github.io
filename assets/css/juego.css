@@ -1,0 +1,184 @@
+/* assets/css/juego.css */
+/* Estilos específicos para la página del juego */
+
+/* Sección del juego */
+.game-section {
+    padding: 5rem 0 3rem;
+}
+
+.game-container {
+    gap: 3rem;
+}
+
+.game-title {
+    font-size: var(--h1-font-size);
+    color: var(--first-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.game-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+/* Estadísticas del juego */
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: var(--font-semi-bold);
+    color: var(--first-color);
+}
+
+.stat-label {
+    font-size: var(--small-font-size);
+    color: var(--text-color-light);
+}
+
+/* Display del color objetivo */
+.target-color-display {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+}
+
+.target-color {
+    font-weight: var(--font-semi-bold);
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Tablero de juego */
+.game-board {
+    width: 100%;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+/* Círculos del juego */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.circle:hover {
+    transform: scale(1.1);
+}
+
+/* Controles del juego */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Instrucciones */
+.game-instructions {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.instructions-title,
+.scores-title {
+    font-size: var(--h2-font-size);
+    color: var(--first-color);
+    margin-bottom: 1rem;
+}
+
+.instructions-list {
+    margin-bottom: 2rem;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.instruction-icon {
+    color: var(--first-color);
+    margin-right: 0.5rem;
+}
+
+/* Puntuaciones altas */
+.scores-list {
+    list-style: none;
+}
+
+.scores-list li {
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Partículas para efectos */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .game-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-board {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .game-board {
+        height: 250px;
+    }
+}
